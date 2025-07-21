@@ -53,8 +53,10 @@ int main(int argc, char **argv) {
   
   int socket = accept(server_fd, (struct sockaddr *) &client_addr, (socklen_t *) &client_addr_len);
   std::cout << "Client connected\n";
+
   char msg[] = "HTTP/1.1 200 OK\r\n\r\n";
   size_t length = std::strlen(msg);
+  
   size_t bytes = send(socket, msg, length, 0);
   
   close(server_fd);
