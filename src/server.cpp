@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
   std::cout << "Client connected\n";
 
   char msg[] = "HTTP/1.1 200 OK\r\n\r\n";
-  size_t length = std::strlen(msg);
+  size_t length = sizeof(msg);
   
   size_t bytes = send(socket, msg, length, 0);
   
