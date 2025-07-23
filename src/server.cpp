@@ -22,7 +22,7 @@ request_line parse_request_line(const std::string& str){
   std::regex_search(str, sm, PATTERN);
   std::cout << "Request line: " << sm.str(0) <<'\n';
   std::cout << "Method: " << sm.str(1) << '\n';
-  std::cout << "Target: " << sm.str(1) << '\n';
+  std::cout << "Target: " << sm.str(2) << '\n';
   std::cout << "Version: " << sm.str(3) << '\n';
   return r;
 }
