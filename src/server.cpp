@@ -95,14 +95,14 @@ int main(int argc, char **argv) {
   int socket = accept(server_fd, (struct sockaddr *) &client_addr, (socklen_t *) &client_addr_len);
   std::cout << "Client connected\n";
 
-  char buffer[2048] = {0};
-  recv(socket, buffer, sizeof(buffer), 0);
+  std::string buffer;
+  recv(socket, buffer, buffer.length(), 0);
 
   std::string request(buffer);
 
   request_line line = parse_request_line(request);
 
-  char msg[] = get_response(line);
+  char msg[] = "Hello";
 
   size_t length = sizeof(msg);
   
