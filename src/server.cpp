@@ -58,6 +58,7 @@ int main(int argc, char **argv) {
   recv(socket, buffer, sizeof(buffer), 0);
 
   std::string request(buffer);
+  
   std::cout << request << '\n';
 
   char msg[] = "HTTP/1.1 200 OK\r\n\r\n";
