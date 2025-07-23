@@ -95,7 +95,7 @@ int main(int argc, char **argv) {
 
   request_line line = parse_request_line(request);
 
-  char msg[] = "Hello!";
+  char msg[] = "HTTP/1.1 200 OK\r\n\r\n";
 
   size_t length = sizeof(msg);
   
