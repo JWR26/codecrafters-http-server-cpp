@@ -17,7 +17,7 @@ struct request_line {
 
 request_line parse_request_line(const std::string& str){
   request_line r;
-  const std::regex PATTERN ("((GET) (/[a-z]*.[a-z]*) (HTTP/\\d*.\\d*))");
+  const std::regex PATTERN ("(GET) (/[a-z]*.[a-z]*) (HTTP/\\d*.\\d*)");
   std::smatch sm;
   std::regex_search(str, sm, PATTERN);
   std::cout << "Request line: " << sm.str(0) <<'\n';
