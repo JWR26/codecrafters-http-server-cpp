@@ -97,11 +97,21 @@ int main(int argc, char **argv) {
 
   request_line line = parse_request_line(request);
 
-  char msg[] = "HTTP/1.1 200 OK\r\n\r\n";
+  if (line.TARGET == ""){
+    char msg[] = "HTTP/1.1 200 OK\r\n\r\n";
 
-  size_t length = sizeof(msg);
-  
-  size_t bytes = send(socket, msg, length, 0);
+    size_t length = sizeof(msg);
+      
+    size_t bytes = send(socket, msg, length, 0);
+  }
+  else {
+    char msg[] = "HTTP/1.1 04 Not Found\r\n\r\n";
+
+    size_t length = sizeof(msg);
+      
+    size_t bytes = send(socket, msg, length, 0);
+  }
+
   
   close(server_fd);
 
