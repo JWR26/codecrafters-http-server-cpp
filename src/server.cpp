@@ -42,12 +42,6 @@ http_request parse_request(const std::string& str){
   return request;
 }
 
-char* get_response(const request_line& line){
-  if (line.TARGET != ""){
-    return "HTTP/1.1 404 Not Found\r\n\r\n";
-  }
-  return "HTTP/1.1 200 OK\r\n\r\n";
-}
 
 int main(int argc, char **argv) {
   // Flush after every std::cout / std::cerr
