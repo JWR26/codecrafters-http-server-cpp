@@ -42,7 +42,6 @@ http_request parse_request(const std::string& str){
   return request;
 }
 
-
 int main(int argc, char **argv) {
   // Flush after every std::cout / std::cerr
   std::cout << std::unitbuf;
@@ -89,14 +88,14 @@ int main(int argc, char **argv) {
   int socket = accept(server_fd, (struct sockaddr *) &client_addr, (socklen_t *) &client_addr_len);
   std::cout << "Client connected\n";
 
-  std::string buffer;
-  recv(socket, buffer, buffer.length(), 0);
+  char* buffer= {0};
+  recv(socket, buffer, strlen(buffer), 0);
 
   std::string request(buffer);
 
   request_line line = parse_request_line(request);
 
-  char msg[] = "Hello";
+  char msg[] = get_response(line);
 
   size_t length = sizeof(msg);
   
