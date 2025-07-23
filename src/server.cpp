@@ -16,14 +16,18 @@ struct request_line {
 };
 
 request_line parse_request_line(const std::string& str){
-  request_line r;
-  const std::regex PATTERN ("(GET) (/[a-z]*.[a-z]*) (HTTP/\\d*.\\d*)");
+  const std::regex PATTERN ("(GET) /([a-z]*.[a-z]*) (HTTP/\\d*.\\d*)");
   std::smatch sm;
   std::regex_search(str, sm, PATTERN);
   std::cout << "Request line: " << sm.str(0) <<'\n';
   std::cout << "Method: " << sm.str(1) << '\n';
   std::cout << "Target: " << sm.str(2) << '\n';
   std::cout << "Version: " << sm.str(3) << '\n';
+  request_line r(
+    sm.str(1),
+    sm.str(2),
+    sm.str(3)
+    );
   return r;
 }
 struct http_request{
@@ -90,9 +94,14 @@ int main(int argc, char **argv) {
 
   std::string request(buffer);
 
-  parse_request_line(request);
+  request_line line = parse_request_line(request);
 
   char msg[] = "HTTP/1.1 200 OK\r\n\r\n";
+
+  if(line.TARGET != ""){
+    msg = "HTTP/1.1 404 Not Found\r\n\r\n";
+  }
+
   size_t length = sizeof(msg);
   
   size_t bytes = send(socket, msg, length, 0);
