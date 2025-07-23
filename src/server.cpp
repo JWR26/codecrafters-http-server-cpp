@@ -89,7 +89,7 @@ int main(int argc, char **argv) {
   std::cout << "Client connected\n";
 
   char buffer[2048] = {0};
-  recv(socket, buffer, strlen(buffer), 0);
+  recv(socket, buffer, sizeof(buffer), 0);
 
   std::string request(buffer);
 
