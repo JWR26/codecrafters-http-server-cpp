@@ -105,7 +105,7 @@ int main(int argc, char **argv) {
     size_t bytes = send(socket, msg, length, 0);
   }
   else {
-    char msg[] = "HTTP/1.1 04 Not Found\r\n\r\n";
+    char msg[] = "HTTP/1.1 404 Not Found\r\n\r\n";
 
     size_t length = sizeof(msg);
       
