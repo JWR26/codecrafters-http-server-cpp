@@ -42,6 +42,12 @@ http_request parse_request(const std::string& str){
   return request;
 }
 
+char[] get_response(const request_line& line){
+  if (line.TARGET != ""){
+    return "HTTP/1.1 404 Not Found\r\n\r\n";
+  }
+  return "HTTP/1.1 200 OK\r\n\r\n";
+}
 
 int main(int argc, char **argv) {
   // Flush after every std::cout / std::cerr
@@ -96,11 +102,7 @@ int main(int argc, char **argv) {
 
   request_line line = parse_request_line(request);
 
-  char msg[] = "HTTP/1.1 200 OK\r\n\r\n";
-
-  if(line.TARGET != ""){
-    msg = "HTTP/1.1 404 Not Found\r\n\r\n";
-  }
+  char msg[] = get_response(line);
 
   size_t length = sizeof(msg);
   
