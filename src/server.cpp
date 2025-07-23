@@ -88,7 +88,7 @@ int main(int argc, char **argv) {
   int socket = accept(server_fd, (struct sockaddr *) &client_addr, (socklen_t *) &client_addr_len);
   std::cout << "Client connected\n";
 
-  char buffer[10] = {0};
+  char buffer[8192] = {0};
   recv(socket, buffer, sizeof(buffer), 0);
 
   std::string request(buffer);
