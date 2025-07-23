@@ -27,7 +27,7 @@ request_line parse_request_line(const std::string& str){
   return r;
 }
 struct http_request{
-  request_line request_line;
+  request_line rl;
   std::string headers;
   std::string body;
 };
