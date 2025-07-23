@@ -42,7 +42,7 @@ http_request parse_request(const std::string& str){
   return request;
 }
 
-char[] get_response(const request_line& line){
+void* get_response(const request_line& line){
   if (line.TARGET != ""){
     return "HTTP/1.1 404 Not Found\r\n\r\n";
   }
