@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <regex>
 #include <string>
 #include <cstring>
 #include <unistd.h>
@@ -7,6 +8,36 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+
+struct request_line {
+  const std::string METHOD;
+  const std::string TARGET;
+  const std::string VERSION;
+};
+
+request_line parse_request_line(const std::string& str){
+  request_line r;
+  const std::regex PATTERN {"((GET) (/[a-z]*.[a-z]*) (HTTP/\d*.\d*))"};
+  std::smatch sm;
+  std::regex_search(str, sm, PATTERN);
+  std::cout << "Request line: " << sm.str(0) <<'\n';
+  std::cout << "Method: " << sm.str(1) << '\n';
+  std::cout << "Target: " << sm.str(1) << '\n';
+  std::cout << "Version: " << sm.str(3) << '\n';
+  return r;
+}
+struct http_request{
+  request_line request_line;
+  std::string headers;
+  std::string body;
+};
+
+http_request parse_request(const std::string& str){
+  http_request request;
+  
+  return request;
+}
+
 
 int main(int argc, char **argv) {
   // Flush after every std::cout / std::cerr
@@ -58,8 +89,8 @@ int main(int argc, char **argv) {
   recv(socket, buffer, sizeof(buffer), 0);
 
   std::string request(buffer);
-  
-  std::cout << request << '\n';
+
+  parse_request_line(request);
 
   char msg[] = "HTTP/1.1 200 OK\r\n\r\n";
   size_t length = sizeof(msg);
