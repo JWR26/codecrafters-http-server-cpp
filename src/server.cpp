@@ -93,7 +93,7 @@ int main(int argc, char **argv) {
 
   std::string request(buffer);
 
-  std::cout << request;
+  std::cout << "Request: " << request;
 
   request_line line = parse_request_line(request);
 
